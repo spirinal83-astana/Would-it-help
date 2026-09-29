@@ -30,7 +30,7 @@ function track(name){
  if(!name)return;
  try{
    let a=JSON.parse(localStorage.getItem('anon_events')||'[]');
-   a.push({event:name,ts:new Date().toISOString(),sid,version:'3.7',
+   a.push({event:name,ts:new Date().toISOString(),sid,version:'3.8',
      source:campaign.source||undefined,campaign:campaign.campaign||undefined,content:campaign.content||undefined});
    localStorage.setItem('anon_events',JSON.stringify(a.slice(-500)));
  }catch(e){}
@@ -41,10 +41,10 @@ function track(name){
    fetch(u,{mode:'no-cors',keepalive:true}).catch(()=>{});
  }
 }
-function accept(){localStorage.setItem('consent_v','3.7');localStorage.setItem('consent_at',new Date().toISOString());go('start')}
+function accept(){localStorage.setItem('consent_v','3.8');localStorage.setItem('consent_at',new Date().toISOString());go('start')}
 async function shareApp(){
   track('share_clicked');
-  const data={title:'От тревоги — к ясности',text:'5–10 минут, чтобы спокойно разобраться в тревожащей ситуации.',url:location.href.split('#')[0]};
+  const data={title:'От тревоги — к ясности',text:'5–10 минут, чтобы спокойно разобраться в тревожащей ситуации.',url:'https://wouldithelp.app/'};
   if(navigator.share){try{await navigator.share(data)}catch(e){}}
   else{try{await navigator.clipboard.writeText(data.url);alert('Ссылка скопирована.')}catch(e){}}
 }
