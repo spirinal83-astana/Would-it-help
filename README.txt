@@ -1,4 +1,4 @@
-ОТ ТРЕВОГИ - К ЯСНОСТИ · Prototype v3.9
+ОТ ТРЕВОГИ - К ЯСНОСТИ · Prototype v3.10
 Разработано: Спирин Александр
 
 ПУБЛИКАЦИЯ НА GITHUB PAGES
@@ -23,20 +23,20 @@ index.html - сайт
 screens.js - тексты и ветвления
 app.js - логика, аудио и события
 config.js - конфигурация аналитики
-Спокойный фон v3.9 генерируется локально браузером и не использует внешний аудиофайл. - собственный тестовый спокойный фон
+Спокойный фон v3.10 генерируется локально браузером и не использует внешний аудиофайл. - собственный тестовый спокойный фон
 worksheet-v3.pdf - новый рабочий бланк A4
 
 
-v3.9: cache-busting для Safari/iPhone; старый ambient.mp3 не используется; спокойный фон генерируется локально браузером.
+v3.10: cache-busting для Safari/iPhone; старый ambient.mp3 не используется; спокойный фон генерируется локально браузером.
 
 
-v3.9: спокойный фон заменён на лицензированный файл calm-background.wav (Main, предоставлен владельцем проекта). Плавный fade-in/fade-out; при завершении 7-минутного трека во время активной сессии — мягкий перезапуск.
+v3.10: спокойный фон заменён на лицензированный файл calm-background.wav (Main, предоставлен владельцем проекта). Плавный fade-in/fade-out; при завершении 7-минутного трека во время активной сессии — мягкий перезапуск.
 
 
-v3.9: licensed 7-minute background converted from WAV to 128 kbps MP3 for GitHub browser upload (<25 MB). Audio behavior unchanged.
+v3.10: licensed 7-minute background converted from WAV to 128 kbps MP3 for GitHub browser upload (<25 MB). Audio behavior unchanged.
 
 
-v3.9 Analytics
+v3.10 Analytics
 ---------------
 GoatCounter site code: wouldithelp
 
@@ -58,7 +58,7 @@ Events:
 The app also retains a bounded local technical event log in the browser for prototype debugging.
 
 
-v3.9 Branding & Sharing
+v3.10 Branding & Sharing
 -----------------------
 Brand mark: «Точка ясности».
 Added favicon, Apple Touch icon, PWA manifest/icons, social preview image,
@@ -66,7 +66,7 @@ and a final-screen Share button using the device's native Share Sheet.
 Anonymous analytics adds: share_clicked.
 
 
-v3.9 Campaign Analytics
+v3.10 Campaign Analytics
 -----------------------
 Adds anonymous event app_opened and campaign attribution from:
 utm_source, utm_campaign, utm_content.
@@ -87,7 +87,7 @@ event/clarity_yes/src-tiktok/cmp-alpha01/cnt-facts
 event/share_clicked/src-tiktok/cmp-alpha01/cnt-facts
 
 
-v3.9 Domain Update
+v3.10 Domain Update
 ------------------
 Primary public URL: https://wouldithelp.app/
 Canonical URL, social preview, native Share, and PWA root now use wouldithelp.app.
@@ -97,9 +97,14 @@ https://wouldithelp.app/?utm_source=tiktok&utm_campaign=alpha01&utm_content=priv
 https://wouldithelp.app/?utm_source=tiktok&utm_campaign=alpha01&utm_content=control
 
 
-v3.9 Social Preview Fix
+v3.10 Social Preview Fix
 -----------------------
 Expanded Open Graph metadata for WhatsApp/Meta crawlers:
 secure image URL, PNG MIME type, 1200x630 dimensions, alt text, site name,
 canonical URL, and matching Twitter/X card metadata.
 OG image URL intentionally has no cache-busting query string.
+
+
+v3.10 Share Fix
+---------------
+Native Web Share sends only https://wouldithelp.app/ so receiving apps can build the Open Graph preview directly from the URL.
