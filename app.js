@@ -4,8 +4,44 @@ let audioOn=false, fadeTimer=null;
 ambient.volume=0;
 function uuid(){return crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2)}
 function eventName(screen,label){const map={start:'session_started',control:'reached_control',safetyStop:'safety_exit',final:'completed'};if(screen==='clarity'){if(label==='Да')return'clarity_yes';if(label==='Частично')return'clarity_partial';if(label==='Нет')return'clarity_no'}return map[screen]||('screen_'+screen)}
-function track(name){if(!name)return;try{let a=JSON.parse(localStorage.getItem('anon_events')||'[]');a.push({event:name,ts:new Date().toISOString(),sid,version:'3.6'});localStorage.setItem('anon_events',JSON.stringify(a.slice(-500)))}catch(e){};const c=window.APP_CONFIG&&APP_CONFIG.goatcounterCode;if(c){const u='https://'+c+'.goatcounter.com/count?p='+encodeURIComponent('/event/'+name)+'&t='+encodeURIComponent(name)+'&e=1';fetch(u,{mode:'no-cors',keepalive:true}).catch(()=>{})}}
-function accept(){localStorage.setItem('consent_v','3.6');localStorage.setItem('consent_at',new Date().toISOString());go('start')}
+function cleanTag(v){return (v||'').toLowerCase().replace(/[^a-z0-9_-]/g,'').slice(0,48)}
+const qs=new URLSearchParams(location.search);
+const campaign={
+ source:cleanTag(qs.get('utm_source')),
+ campaign:cleanTag(qs.get('utm_campaign')),
+ content:cleanTag(qs.get('utm_content'))
+};
+try{
+ if(campaign.source||campaign.campaign||campaign.content){
+   sessionStorage.setItem('campaign_v37',JSON.stringify(campaign));
+ }else{
+   const saved=JSON.parse(sessionStorage.getItem('campaign_v37')||'{}');
+   campaign.source=saved.source||'';campaign.campaign=saved.campaign||'';campaign.content=saved.content||'';
+ }
+}catch(e){}
+function campaignSuffix(){
+ const parts=[];
+ if(campaign.source)parts.push('src-'+campaign.source);
+ if(campaign.campaign)parts.push('cmp-'+campaign.campaign);
+ if(campaign.content)parts.push('cnt-'+campaign.content);
+ return parts.length?'/'+parts.join('/'):'';
+}
+function track(name){
+ if(!name)return;
+ try{
+   let a=JSON.parse(localStorage.getItem('anon_events')||'[]');
+   a.push({event:name,ts:new Date().toISOString(),sid,version:'3.7',
+     source:campaign.source||undefined,campaign:campaign.campaign||undefined,content:campaign.content||undefined});
+   localStorage.setItem('anon_events',JSON.stringify(a.slice(-500)));
+ }catch(e){}
+ const c=window.APP_CONFIG&&APP_CONFIG.goatcounterCode;
+ if(c){
+   const path='/event/'+name+campaignSuffix();
+   const u='https://'+c+'.goatcounter.com/count?p='+encodeURIComponent(path)+'&t='+encodeURIComponent(name)+'&e=1';
+   fetch(u,{mode:'no-cors',keepalive:true}).catch(()=>{});
+ }
+}
+function accept(){localStorage.setItem('consent_v','3.7');localStorage.setItem('consent_at',new Date().toISOString());go('start')}
 async function shareApp(){
   track('share_clicked');
   const data={title:'От тревоги — к ясности',text:'5–10 минут, чтобы спокойно разобраться в тревожащей ситуации.',url:location.href.split('#')[0]};
@@ -39,4 +75,7 @@ ambient.addEventListener('ended',()=>{
   // Main track is ~7 minutes. If a session lasts longer, restart softly.
   if(audioOn){ambient.currentTime=0;ambient.volume=0;ambient.play().then(()=>rampVolume(0.16,1800)).catch(()=>{});}
 });
-if(!localStorage.getItem('consent_v'))current='consent';else{current='start';sid=uuid()}render();
+if(!localStorage.getItem('consent_v'))current='consent';else{current='start';sid=uuid()}
+render();
+if(!sid)sid=uuid();
+track('app_opened');

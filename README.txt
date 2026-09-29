@@ -1,4 +1,4 @@
-ОТ ТРЕВОГИ - К ЯСНОСТИ · Prototype v3.6
+ОТ ТРЕВОГИ - К ЯСНОСТИ · Prototype v3.7
 Разработано: Спирин Александр
 
 ПУБЛИКАЦИЯ НА GITHUB PAGES
@@ -23,20 +23,20 @@ index.html - сайт
 screens.js - тексты и ветвления
 app.js - логика, аудио и события
 config.js - конфигурация аналитики
-Спокойный фон v3.6 генерируется локально браузером и не использует внешний аудиофайл. - собственный тестовый спокойный фон
+Спокойный фон v3.7 генерируется локально браузером и не использует внешний аудиофайл. - собственный тестовый спокойный фон
 worksheet-v3.pdf - новый рабочий бланк A4
 
 
-v3.6: cache-busting для Safari/iPhone; старый ambient.mp3 не используется; спокойный фон генерируется локально браузером.
+v3.7: cache-busting для Safari/iPhone; старый ambient.mp3 не используется; спокойный фон генерируется локально браузером.
 
 
-v3.6: спокойный фон заменён на лицензированный файл calm-background.wav (Main, предоставлен владельцем проекта). Плавный fade-in/fade-out; при завершении 7-минутного трека во время активной сессии — мягкий перезапуск.
+v3.7: спокойный фон заменён на лицензированный файл calm-background.wav (Main, предоставлен владельцем проекта). Плавный fade-in/fade-out; при завершении 7-минутного трека во время активной сессии — мягкий перезапуск.
 
 
-v3.6: licensed 7-minute background converted from WAV to 128 kbps MP3 for GitHub browser upload (<25 MB). Audio behavior unchanged.
+v3.7: licensed 7-minute background converted from WAV to 128 kbps MP3 for GitHub browser upload (<25 MB). Audio behavior unchanged.
 
 
-v3.6 Analytics
+v3.7 Analytics
 ---------------
 GoatCounter site code: wouldithelp
 
@@ -58,9 +58,30 @@ Events:
 The app also retains a bounded local technical event log in the browser for prototype debugging.
 
 
-v3.6 Branding & Sharing
+v3.7 Branding & Sharing
 -----------------------
 Brand mark: «Точка ясности».
 Added favicon, Apple Touch icon, PWA manifest/icons, social preview image,
 and a final-screen Share button using the device's native Share Sheet.
 Anonymous analytics adds: share_clicked.
+
+
+v3.7 Campaign Analytics
+-----------------------
+Adds anonymous event app_opened and campaign attribution from:
+utm_source, utm_campaign, utm_content.
+
+No free text, anxiety content, name, email, IP-derived identifier, or ad-platform
+user identifier is added by this app.
+
+Example campaign URLs:
+?utm_source=tiktok&utm_campaign=alpha01&utm_content=facts
+?utm_source=tiktok&utm_campaign=alpha01&utm_content=privacy
+?utm_source=tiktok&utm_campaign=alpha01&utm_content=control
+
+GoatCounter event paths are segmented like:
+event/app_opened/src-tiktok/cmp-alpha01/cnt-facts
+event/session_started/src-tiktok/cmp-alpha01/cnt-facts
+event/reached_control/src-tiktok/cmp-alpha01/cnt-facts
+event/clarity_yes/src-tiktok/cmp-alpha01/cnt-facts
+event/share_clicked/src-tiktok/cmp-alpha01/cnt-facts
