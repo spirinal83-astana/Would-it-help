@@ -1,4 +1,4 @@
-ОТ ТРЕВОГИ - К ЯСНОСТИ · Prototype v3.4
+ОТ ТРЕВОГИ - К ЯСНОСТИ · Prototype v3.5
 Разработано: Спирин Александр
 
 ПУБЛИКАЦИЯ НА GITHUB PAGES
@@ -23,14 +23,36 @@ index.html - сайт
 screens.js - тексты и ветвления
 app.js - логика, аудио и события
 config.js - конфигурация аналитики
-Спокойный фон v3.4 генерируется локально браузером и не использует внешний аудиофайл. - собственный тестовый спокойный фон
+Спокойный фон v3.5 генерируется локально браузером и не использует внешний аудиофайл. - собственный тестовый спокойный фон
 worksheet-v3.pdf - новый рабочий бланк A4
 
 
-v3.4: cache-busting для Safari/iPhone; старый ambient.mp3 не используется; спокойный фон генерируется локально браузером.
+v3.5: cache-busting для Safari/iPhone; старый ambient.mp3 не используется; спокойный фон генерируется локально браузером.
 
 
-v3.4: спокойный фон заменён на лицензированный файл calm-background.wav (Main, предоставлен владельцем проекта). Плавный fade-in/fade-out; при завершении 7-минутного трека во время активной сессии — мягкий перезапуск.
+v3.5: спокойный фон заменён на лицензированный файл calm-background.wav (Main, предоставлен владельцем проекта). Плавный fade-in/fade-out; при завершении 7-минутного трека во время активной сессии — мягкий перезапуск.
 
 
-v3.4: licensed 7-minute background converted from WAV to 128 kbps MP3 for GitHub browser upload (<25 MB). Audio behavior unchanged.
+v3.5: licensed 7-minute background converted from WAV to 128 kbps MP3 for GitHub browser upload (<25 MB). Audio behavior unchanged.
+
+
+v3.5 Analytics
+---------------
+GoatCounter site code: wouldithelp
+
+External analytics contains only anonymous product events. No free-text answers,
+anxiety content, names, email addresses, or account data are sent by the app.
+
+Events:
+- session_started
+- reached_control
+- completed / session_completed
+- clarity_yes
+- clarity_partial
+- clarity_no
+- worksheet_opened
+- ambient_on
+- ambient_off
+- safety_exit
+
+The app also retains a bounded local technical event log in the browser for prototype debugging.

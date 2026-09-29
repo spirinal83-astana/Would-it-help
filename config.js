@@ -1,1 +1,1 @@
-window.APP_CONFIG={version:'3.0',goatcounterCode:''};
+window.APP_CONFIG={version:'3.0',goatcounterCode: 'wouldithelp'};
